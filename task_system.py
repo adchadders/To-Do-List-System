@@ -92,7 +92,7 @@ def edit_list(task):
     if option == "Delete Sublist" and task.subtasks != []:
         del(task.subtasks[select_list()])
 
-    if option == "Open Sub Task":
+    if option == "Open Subtask":
         selected = select_list(task.subtasks)
         task.subtasks[selected] = edit_list(task.subtasks[selected])
         
@@ -122,10 +122,17 @@ def main_menu_operation(option,lists):
 
 
 
+if os.path.exists("lists.pkl"):
+    lists = load_lists()
 
-lists = load_lists()
+else:
+    lists = []
+
 clear_console()
 while True:
     option =  get_main_menu_option()
     print(option)
     lists = main_menu_operation(option,lists)
+
+    if option == "Save and Quit":
+        break
